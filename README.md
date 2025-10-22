@@ -34,7 +34,7 @@ optimizer = torch.optim.Adam(model.parameters(), lr=0.0003, weight_decay=1e-4)
 
 # Hyperparameters
 batch_size = 64
-epochs = 50
+epochs = 20
 ```
 
 **Key choices**:
@@ -57,7 +57,7 @@ python predict.py --image_path image.jpg --model_path checkpoints/best_model.pth
 ## Expected Results
 
 - **Validation accuracy**: ~75-80%
-- **Training time**: ~30-45 min on GPU (50 epochs)
+- **Training time**: ~30-45 min on GPU (20 epochs)
 
 ## Project Structure
 
