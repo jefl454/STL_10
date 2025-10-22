@@ -1,30 +1,37 @@
-# STL-10 Image Classification
+# 🐶 STL-10 Image Classification
 
-Image classification on STL-10 dataset using EfficientNet-B0 with PyTorch.
+> Image classification on **STL-10 dataset** using **EfficientNet-B0** with PyTorch.  
+> A compact and efficient CNN achieving ~80% accuracy on 10 object classes.
 
-## Dataset
+---
 
-**STL-10**: 10 classes (airplane, bird, car, cat, deer, dog, horse, monkey, ship, truck)
-- Training: 5,000 images (500/class)
-- Test: 8,000 images (800/class)  
-- Image size: 96x96x3
+## 🧩 Dataset Overview
 
-## Model Architecture
+**STL-10 Dataset**
+
+> 10 categories: ✈️ airplane, 🐦 bird, 🚗 car, 🐱 cat, 🦌 deer, 🐕 dog, 🐎 horse, 🐒 monkey, 🚢 ship, 🚚 truck.
+
+| Split | #Images | Per Class | Image Size |
+|:------|:--------:|:----------:|:------------:|
+| Train | 5,000 | 500 | 96×96×3 |
+| Test  | 8,000 | 800 | 96×96×3 |
+
+---
+
+## 🧠 Model Architecture
 
 **EfficientNet-B0**
-- Pre-trained on ImageNet
+- Pre-trained on **ImageNet**
 - ~5.3M parameters
-- Modified final FC layer for 10 classes
+- Replaced final fully-connected (FC) layer → 10 output classes
 
-## Installation
+<p align="center">
+  <img src="assets/model_architecture.png" width="550" alt="EfficientNet-B0 Architecture">
+</p>
 
-```bash
-pip install torch torchvision efficientnet-pytorch matplotlib numpy
-```
+---
 
-## Training Configuration
-
-```python
+## ⚙️ Installation
 # Model
 model = EfficientNet.from_pretrained('efficientnet-b0', num_classes=10)
 
@@ -35,54 +42,25 @@ optimizer = torch.optim.Adam(model.parameters(), lr=0.0003, weight_decay=1e-4)
 # Hyperparameters
 batch_size = 64
 epochs = 20
-```
-
-**Key choices**:
-- `lr=0.0003`: Lower LR for stable fine-tuning (reduced from 0.001)
-- `weight_decay=1e-4`: L2 regularization to prevent overfitting on small dataset
-
-## Usage
-
-```bash
-# Train
+# Train model
 python train.py
 
-# Evaluate  
+# Evaluate performance
 python evaluate.py --model_path checkpoints/best_model.pth
 
-# Predict
+# Predict a single image
 python predict.py --image_path image.jpg --model_path checkpoints/best_model.pth
-```
-
-## Expected Results
-
-- **Validation accuracy**: ~75-80%
-- **Training time**: ~30-45 min on GPU (20 epochs)
-
-## Project Structure
-
-```
 STL_10/
 ├── data/               # Auto-downloaded dataset
-├── checkpoints/        # Saved models
+├── checkpoints/        # Saved model weights
+├── assets/             # Images, charts, visuals
+│   ├── model_architecture.png
+│   └── training_curve.png
 ├── train.py           
 ├── evaluate.py        
 ├── predict.py         
 └── README.md
-```
 
-## Improvement Tips
 
-- Add learning rate scheduler (ReduceLROnPlateau, CosineAnnealing)
-- Advanced augmentation (AutoAugment, RandAugment)
-- Use unlabeled data (100k images) for semi-supervised learning
-- Try larger models (EfficientNet-B1/B2)
-
-## References
-
-- [STL-10 Dataset](https://cs.stanford.edu/~acoates/stl10/)
-- [EfficientNet Paper](https://arxiv.org/abs/1905.11946)
-
-## License
-
-MIT License
+```bash
+pip install torch torchvision efficientnet-pytorch matplotlib numpy
