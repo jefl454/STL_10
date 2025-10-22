@@ -25,10 +25,6 @@
 - ~5.3M parameters
 - Replaced final fully-connected (FC) layer → 10 output classes
 
-<p align="center">
-  <img src="assets/model_architecture.png" width="550" alt="EfficientNet-B0 Architecture">
-</p>
-
 ---
 
 ## ⚙️ Installation
